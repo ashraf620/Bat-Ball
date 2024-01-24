@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bat Ball stump</title>
+</head>
+<style>
+   body{
+        
+        height:280px;
+        text-align:center;
+      }
+   #msg{
+    color:rgb(137, 79, 79);
+   font-family: 'Times New Roman', Times, serif;
+    
+   }
+   .choice-button{
+
+      height:100px;
+      width:100px;
+      margin:20px;
+      background-color: rgb(97, 182, 44);
+      border:none;
+      border-radius: 50px;
+      cursor:pointer;
+     
+
+
+   }
+   .choice-image{
+      height:60px;
+      
+   }
+   .choice-button:hover{
+      border-radius: 10px;
+     
+   }
+</style>
+<body>
+    <h1>Bat Ball Stump Game</h1>
+
+    
+    
+   
+    <!-- this will generate random no by computer -->
+    <button class="choice-button" onclick="
+    let computerchoice=generatecomputerchoice();
+    let resultmsg=getresult('Bat',computerchoice);
+    
+
+    
+     
+    document.getElementById('msg').innerHTML=` you have choosen Bat.<br>computer choose ${computerchoice} <br>${resultmsg}<br>No of matches:
+    win:${score.win},lost:${score.lost},tie:${score.tie} `;
+    console.log(score);
+
+    localStorage.setItem('score',JSON.stringify(score));
+    "> 
+    <img src="bat.jpeg" alt="bat" class="choice-image"></button>
+
+
+    <button  class="choice-button" onclick="
+     computerchoice=generatecomputerchoice();
+     resultmsg=getresult('Ball',computerchoice);
+
+    
+     
+    
+    //   alert(`you have choosen Ball.computer choice is ${computerchoice} and ${resultmsg}`);
+    document.getElementById('msg').innerHTML=` you have choosen Ball.<br>computer choose ${computerchoice} <br>
+    ${resultmsg}<br>No of matches:
+    win:${score.win},lost:${score.lost},tie:${score.tie} `;
+    console.log(score);
+
+    localStorage.setItem('score',JSON.stringify(score));
+    
+
+    "><img src="download.jpeg" alt="ball" class="choice-image">
+    </button>
+
+      
+    <button class="choice-button"  onclick=" 
+      computerchoice=generatecomputerchoice();
+      resultmsg=getresult('Stump',computerchoice);
+
+   
+      document.getElementById('msg').innerHTML=` you have choosen stump.<br>computer choose ${computerchoice} <br>${resultmsg}<br>No of matches:
+    win:${score.win},lost:${score.lost},tie:${score.tie} `;
+    console.log(score);
+
+    localStorage.setItem('score',JSON.stringify(score));
+  "> <img src="stump.jpeg" alt="stump" class="choice-image">
+  </button>
+     
+  
+
+
+<h1 id="msg"></h1>
+<button onclick="localStorage.clear()
+  score={
+     win:0,
+     lost:0,
+     tie:0,
+  };
+">Reset</button>
+<script>
+   let score={
+   win:0,
+   lost:0,
+   tie:0,
+   };
+
+  
+   function generatecomputerchoice()
+   {
+    let randomnumber=Math.random()*3;
+    if(randomnumber >0 &&randomnumber<= 1)
+    {
+         return 'Bat';
+       
+    }
+    else if(randomnumber>1&& randomnumber<=2)
+    {
+        return 'Ball';
+         
+       
+    }
+     else{
+         return 'stump';
+        
+     }
+   }
+
+   function getresult(usermove,computermove)
+   {
+      if(usermove==='Bat')
+         {
+            if(computermove==='Ball')
+            {
+               score.win++;
+               return ('user won');
+               
+               
+            }
+            else if(computermove==='Bat')
+            {
+               score.tie++;
+            return (`it's a tie`);
+             
+            }
+            else {
+               score.lost++;
+               return (' computer has won')
+              
+            }
+         }
+      else if(usermove ==='Ball')
+      {
+         if(computermove==='Ball')
+         {
+            score.tie++;
+            return (`It's a tie`);
+           
+         }
+         else if(computerchoice==='Bat')
+         {
+            score.lost++;
+            return ('computer won');
+           
+         }
+         else {
+            score.win++;
+            return ('user won');
+            
+         }
+      }
+
+      else{
+
+            if(computermove==='Ball')
+            {
+               score.lost++;
+               return ('computer has won');
+            
+            }
+            else if(computermove==='Bat')
+            {
+               score.win++;
+               return ('user has won');
+              
+            }
+            else {
+               score.tie++;
+               return (`It's a tie`);
+              
+            }
+         }
+}
+</script>
+</body>
+
+</html>
